@@ -1,0 +1,13 @@
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\GEH.dll
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\GEH.pdb
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\OpenTK.dll
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\OpenTK.GLControl.dll
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\OpenTK.pdb
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\OpenTK.xml
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\OpenTK.GLControl.pdb
+C:\Users\tatar\source\repos\GEH\GEH\bin\Debug\OpenTK.GLControl.xml
+C:\Users\tatar\source\repos\GEH\GEH\obj\Debug\GEH.csproj.AssemblyReference.cache
+C:\Users\tatar\source\repos\GEH\GEH\obj\Debug\GEH.csproj.CoreCompileInputs.cache
+C:\Users\tatar\source\repos\GEH\GEH\obj\Debug\GEH.csproj.CopyComplete
+C:\Users\tatar\source\repos\GEH\GEH\obj\Debug\GEH.dll
+C:\Users\tatar\source\repos\GEH\GEH\obj\Debug\GEH.pdb

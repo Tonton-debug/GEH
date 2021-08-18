@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEH", "GEH\GEH.csproj", "{86C2E5F0-27E1-41B1-BFCD-3EA90606134D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOpenTK", "TestOpenTK\TestOpenTK.csproj", "{A92B60A3-A6B9-4827-BAFB-3421E83D56EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86C2E5F0-27E1-41B1-BFCD-3EA90606134D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C2E5F0-27E1-41B1-BFCD-3EA90606134D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C2E5F0-27E1-41B1-BFCD-3EA90606134D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C2E5F0-27E1-41B1-BFCD-3EA90606134D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A92B60A3-A6B9-4827-BAFB-3421E83D56EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A92B60A3-A6B9-4827-BAFB-3421E83D56EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A92B60A3-A6B9-4827-BAFB-3421E83D56EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A92B60A3-A6B9-4827-BAFB-3421E83D56EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {111F7AB4-AA68-4463-B7C4-589409E651E2}
+	EndGlobalSection
+EndGlobal

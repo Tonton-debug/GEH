@@ -6,40 +6,42 @@ using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Threading;
-using GEH;
-namespace TestOpenTK
+namespace Game
 {
     class Program
     {
      
         static void Main(string[] args)
         {
-         
-           
-         
-          
-            Scene scene = new Scene("1");
-           
-            List<GameObject2> games = new List<GameObject2>();
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine(i+"/"+ 5);
-                GameObject2 gameObject2 = new GameObject2();
-                games.Add(gameObject2);
-             //   Shader shader = games.Last().GetComponent(new Shader()) as Shader;
-              
-            }
-            foreach (var item in games)
-            {
-                scene.AddEntityToScene(item);
-            }
-            Scene.LoadScene(0);
 
 
-            Scene.CreateAndRunWindow(1000, 1000);
            
-          
-          
+            using (Window window = new Window(0))
+            {
+                window.Run(60, 60);
+            }
+           
+
+
+            //List<GameObject2> gameObject2 = new List<GameObject2>();
+            //for (int i = 0; i < 500; i++)
+            //{
+            //    gameObject2.Add(new GameObject2());
+            //}
+
+
+
+            //foreach (var item in gameObject2)
+            //{
+            //    scene.AddEntityToScene(item);
+            //}
+
+
+
+
+
+
+
 
 
         }

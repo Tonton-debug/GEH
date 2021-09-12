@@ -10,48 +10,56 @@ using OpenTK.Graphics.OpenGL;
 using System.Threading;
 namespace GEH
 {
-   public  class Shader:Component
+    public class Shader
     {
         public bool ShaderIsLoad;
         private int _idVertexShader;
         private int _idFragmentShader;
-        private Dictionary<string, Matrix4> _dictionaryForShaderUniforms = new Dictionary<string, Matrix4>();
-      
+        private Matrix4 sendMatrix;
+        private string _pathShaderVetrex;
+        private string _pathShaderColor;
+        private bool disposedValue = false;
         public int Handle { get; private set; }
         public Shader()
         {
 
         }
-        public void AddUniform(string nameUniformInShader,Matrix4 matrixForUniform)
+        public Shader(string pathShaderVetrex, string pathShaderColor)
         {
-            Thread.Sleep(1);
-            _dictionaryForShaderUniforms.Add(nameUniformInShader, matrixForUniform);
-            Console.WriteLine("Fine");
+            _pathShaderVetrex = pathShaderVetrex;
+            _pathShaderColor = pathShaderColor;
         }
+        public void UpdateUniform(Matrix4 matrixForUniform)
+        {
+
+            // Thread.Sleep(0);
+            sendMatrix = matrixForUniform;
+            //      Console.WriteLine("time obj update shader:" + DateTime.Now.Millisecond);
+            //   Console.WriteLine("Fine");
+        }
+
         private void SetAllUniforms()
         {
-            foreach (var item in _dictionaryForShaderUniforms)
-            {
-             //  Thread.Sleep(1);
-                int location = GL.GetUniformLocation(Handle, item.Key);
-          
-                Matrix4 sendMatrix = item.Value;
-                GL.UniformMatrix4(location,false,ref sendMatrix);
-                Console.WriteLine("\n"+item.Value+"\n"+ Handle);
-            }
+
+           
+            // _dictionaryForShaderUniforms[_dictionaryForShaderUniforms.ElementAt(i).Key] = sendMatrix;
+            //        Console.WriteLine("time obj set// shader:" + DateTime.Now.Millisecond);
+
+
         }
-        public void LoadShaders(string pathShaderVetrex, string pathShaderColor)
+        public void LoadShaders()
         {
+           
             string VertexShaderSource;
 
-            using (StreamReader reader = new StreamReader(pathShaderVetrex, Encoding.UTF8))
+            using (StreamReader reader = new StreamReader(@"Shaders\"+_pathShaderVetrex, Encoding.UTF8))
             {
                 VertexShaderSource = reader.ReadToEnd();
             }
 
             string FragmentShaderSource;
 
-            using (StreamReader reader = new StreamReader(pathShaderColor, Encoding.UTF8))
+            using (StreamReader reader = new StreamReader(@"Shaders\" + _pathShaderColor, Encoding.UTF8))
             {
                 FragmentShaderSource = reader.ReadToEnd();
             }
@@ -70,14 +78,14 @@ namespace GEH
 
             string infoLogFrag = GL.GetShaderInfoLog(_idFragmentShader);
 
-            if (infoLogFrag !=String.Empty)
+            if (infoLogFrag != String.Empty)
                 Console.WriteLine(infoLogFrag);
-        
+
             Handle = GL.CreateProgram();
 
             GL.AttachShader(Handle, _idVertexShader);
             GL.AttachShader(Handle, _idFragmentShader);
-         
+
             GL.LinkProgram(Handle);
             GL.DetachShader(Handle, _idVertexShader);
             GL.DetachShader(Handle, _idFragmentShader);
@@ -85,13 +93,22 @@ namespace GEH
             GL.DeleteShader(_idVertexShader);
 
             ShaderIsLoad = true;
-          
+
         }
         public void Use()
         {
-          
+            //    Console.WriteLine(Camera.main.GetMatrix());
             GL.UseProgram(Handle);
-            SetAllUniforms();
+
+            int location = GL.GetUniformLocation(Handle, "all");
+
+
+            GL.UniformMatrix4(location, false, ref sendMatrix);
+
         }
+
+
+
+
     }
 }

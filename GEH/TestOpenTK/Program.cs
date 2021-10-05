@@ -14,9 +14,11 @@ namespace Game
         static void Main(string[] args)
         {
 
-
-           
-            using (Window window = new Window(0))
+            int i;
+            if(!int.TryParse(Console.ReadKey().KeyChar.ToString(),out i))
+                i = 0;
+            
+            using (Window window = new Window(i==0?GameWindowFlags.Default:GameWindowFlags.Fullscreen))
             {
                 window.Run(60, 60);
             }

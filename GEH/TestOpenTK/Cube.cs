@@ -9,13 +9,15 @@ namespace Game
 {
     class Cube:Entity
     {
-        public Cube(bool isPhysic) : base("cube")
+        public Cube() : base("cube")
         {
             Random random = new Random();
-            ScaleEntity = new Vector3(3, 3, 3);
-            PositionEntity = new Vector3(random.Next(-10, 10), isPhysic?0:-6, random.Next(-10, 10));
+            int size = random.Next(1, 4);
+            ScaleEntity = new Vector3(random.Next(1, 4), random.Next(1, 4), random.Next(1, 4));
+            PositionEntity = new Vector3(random.Next(-10,10), true?0:-100, random.Next(-10, 10));
+      //     RotateEntity = new Vector3(random.Next(0, 90), random.Next(0, 90), random.Next(0, 90));
             CollisionComponent.IsEnabled = true;
-            PhysicsComponent.IsEnabled = isPhysic;
+            PhysicsComponent.IsEnabled = true;
         }
     }
 }

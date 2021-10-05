@@ -13,8 +13,8 @@ namespace Game
         {
             CameraComponent.IsEnabled = true;
             CameraComponent.SetActiveMainCamera();
-              CameraComponent.SetPosition(new Vector3(0, 0, 30));
-          //  CameraComponent.SetRotate(0, -3f);
+              CameraComponent.SetPosition(new Vector3(0, 5, 30));
+            CameraComponent.SetRotate(0, 0f);
         }
      
     }

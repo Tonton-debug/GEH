@@ -15,28 +15,24 @@ namespace Game
 {
     class Window:GameWindow
     {
-        private Shader shader = new Shader(@"shader.vert", @"shader.frag");
+      
         public static List<Entity> entities = new List<Entity>();
-        public Window(int count ) : base(512, 512, new GraphicsMode(32, 24, 0, 4),"s",GameWindowFlags.Fullscreen,DisplayDevice.Default,0,0,GraphicsContextFlags.Default)
+        public Window(GameWindowFlags flag) : base(512, 512, new GraphicsMode(32, 24, 0, 4),"s", flag, DisplayDevice.Default,0,0,GraphicsContextFlags.Default)
         {
         
             Load += Window_Load;
             UpdateFrame += Window_UpdateFrame;
             RenderFrame += Window_RenderFrame;
-           
+            Closing += Window_Closing;   
             FocusedChanged += Window_FocusedChanged;
-          
         }
 
-        private void Window_FocusedChanged(object sender, EventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           
         }
-
-       
-
-        
-        
+        private void Window_FocusedChanged(object sender, EventArgs e)
+        {     
+        }
         private void Window_UpdateFrame(object sender, FrameEventArgs e)
         {
             if (Keyboard.GetState().IsKeyDown(Key.Escape))
@@ -45,16 +41,15 @@ namespace Game
             }
             if (Keyboard.GetState().IsKeyDown(Key.Q))
             {
-                Scene.AddEntity(new Cube(true));
+                
+                Thread.Sleep(100);
             }
             if (Keyboard.GetState().IsKeyDown(Key.E))
             {
-                Scene.AddEntity(new Cube(false));
+               
+                Thread.Sleep(100);
             }
-            foreach (var item in Scene.entities)
-            {        
-                item.Update();
-            }    
+            
         }
 
         private void Window_RenderFrame(object sender, FrameEventArgs e)
@@ -62,17 +57,13 @@ namespace Game
             GL.Viewport(0,0,Width,Height);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Enable(EnableCap.DepthTest);
-            foreach (var item in Scene.entities)
-            {
+            //foreach (var item in Scene.entities)
+            //{
              
-                item.VusialEntity();
-                shader.UpdateUniform(item.ModelMatrix * Matrix4.CreatePerspectiveFieldOfView(1.3f, (float)Width / (float)Height, 1.0f, 100.0f));
-                shader.Use();
-                GL.DrawElements(PrimitiveType.Triangles, item.GetPoints().ToArray().Length, DrawElementsType.UnsignedInt, 0);
+            //    item.VusialEntity();
+               
 
-                GL.DisableVertexAttribArray(0);
-                GL.DisableVertexAttribArray(1);
-            }
+            //}
            
             SwapBuffers();
         }
@@ -82,11 +73,9 @@ namespace Game
             GL.PointSize(5f);
           //  CursorGrabbed = true;
            
-            shader.LoadShaders();
+            
           
-            Scene.AddEntity(new MainCamera());
-            Scene.AddEntity(new Player());
-            Scene.AddEntity(new Platform());
+           
          GL.ClearColor(0.2f, 0.6f, 1, 1);
             SwapBuffers();      
             CursorVisible = false;

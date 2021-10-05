@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace GEH
 {
-  public static   class Scene
+    public abstract class Scene
     {
-     public static  List<Entity> entities = new List<Entity>();
-        public static void AddEntity(Entity get)
+        private List<Prefab> prefabsInScene = new List<Prefab>();
+        public List<Prefab> GetAllPrefabsInScene()
         {
-            entities.Add(get);
+            return prefabsInScene;
+        }
+        protected void AddPrefabsInScene(Prefab prefab)
+        {
+            prefabsInScene.Add(prefab);
         }
        
+
     }
 }

@@ -9,7 +9,7 @@ namespace GEH.Components
     public abstract class Component
     {
         public bool IsEnabled;
-        protected Entity MainEntity;
+        public Entity  MainEntity { get; protected set; }
         protected virtual void CheckIsEnabledComponent()
         {
             if (!IsEnabled)

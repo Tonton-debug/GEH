@@ -19,9 +19,9 @@ namespace GEH.Components
     {
      
         public StatePhysics MyStatePhysics { get; private set; }
-        private const float g = 1f;
-        private double time = 0;
-        private List<Vector3> lastPositions = new List<Vector3>();
+        private const float G = -0.98f;
+        private double _time = 0;
+        private double _middleTime = 0.1;
         public Physics(Entity entity)
         {
             MainEntity = entity;
@@ -31,10 +31,10 @@ namespace GEH.Components
         {
             if (getStatePhysics != MyStatePhysics)
             {
-                time = 0;
+                _time = 0;
                 MyStatePhysics = getStatePhysics;
                 
-                lastPositions = new List<Vector3>();
+              
             }
         }
         private bool IsCollision(Vector3 XYZForCheck,Vector3 moveVector)
@@ -50,25 +50,35 @@ namespace GEH.Components
         public void AddMomentum(Vector3 speedXYZEntity)
         {  
             CheckIsEnabledComponent();
-            ResetChange(StatePhysics.Fly);    
-            Vector3 endVector = new Vector3((float)(speedXYZEntity.X * Math.Cos(1) * time), (float)((speedXYZEntity.Y * Math.Sin(1) * time) - (g * Math.Pow(time, 2) / 2)), (float)(speedXYZEntity.Z * Math.Cos(1) * time));
-            lastPositions.Add(MainEntity.PositionEntity);
-            time +=0.1;
-            MainEntity.Move(endVector);
+            ResetChange(StatePhysics.Fly);
+            //speedXYZEntity = new Vector3((float)(speedXYZEntity.X * Math.Sin(45) + G * _time),
+            //    (float)(speedXYZEntity.Y * Math.Sin(45) + G * _time),
+            //    (float)(speedXYZEntity.Z * Math.Sin(45) + G * _time));
+            speedXYZEntity.Y = speedXYZEntity.Y!=0?(float)(speedXYZEntity.Y * Math.Sin(45) + G * _time): speedXYZEntity.Y;
+            //speedXYZEntity.X = speedXYZEntity.X!=0?(float)(speedXYZEntity.X * Math.Sin(45) + G * _time): speedXYZEntity.X;
+            //speedXYZEntity.Z = speedXYZEntity.Z!=0?(float)(speedXYZEntity.X * Math.Sin(45) + G * _time): speedXYZEntity.Z;
+            Vector3 endVector = new Vector3((float)(speedXYZEntity.X * Math.Cos(45) * _time),
+                (float)(speedXYZEntity.Y * Math.Sin(45) * _time + (G * Math.Pow(_time, 2)) / 2),
+                (float)(speedXYZEntity.Z * Math.Cos(45) * _time));
+         //   endVector=new Vector3((float)Math.Round(endVector.X,2), (float)Math.Round(endVector.Y, 2), (float)Math.Round(endVector.Z, 2));
+             _time += _middleTime;
+            _time = Math.Round(_time, 1);
+                MainEntity.Move(endVector);
             MainEntity.CollisionComponent.SetPlacesCollisionsWithOtherEntities();
-            if (IsCollision(speedXYZEntity,endVector))
+            Console.WriteLine("Y:::"+Math.Round(endVector.Y,2));
+            if (MainEntity.CollisionComponent.GetPlaneCollisionsFromDictionary().Count!=0&&_time>0.3)
             {  
                     MyStatePhysics = StatePhysics.Fall;
+              
             }
         }
+       
         public void Fall()
         {
             CheckIsEnabledComponent();
-            //     ResetChange(StatePhysics.Fall);
+        
             if (!MainEntity.CollisionComponent.GetPlaneCollisionsFromDictionary().Contains(PlaneCollision.Down) && MyStatePhysics == StatePhysics.Fall)
-                MainEntity.Move(-new Vector3(0,(float)Math.Round(g,0), 0));
-           
-           
+                MainEntity.Move(-new Vector3(0, (float)Math.Round(-G, 1), 0)); 
         }
     }
 }

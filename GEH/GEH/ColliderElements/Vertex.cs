@@ -19,6 +19,7 @@ namespace GEH.ColliderElements
         {
             Vector3 startPosition = entityForWork.PositionEntity;
             Vector3 startScale = entityForWork.ScaleEntity;
+
             X = startPosition.X + (positiveOffsetX ? (startScale.X / 2) : -(startScale.X / 2));
             Y = startPosition.Y + (positiveOffsetY ? (startScale.Y / 2) : -(startScale.Y / 2));
             Z = startPosition.Z + (positiveOffsetZ ? (startScale.Z / 2) : -(startScale.Z / 2));
